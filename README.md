@@ -23,7 +23,7 @@ Para poder levantar este ambiente es necesario los siguientes programas y/o depe
 
 ---
 
-## Considerations.
+## Consideraciones.
 
 Por defecto la aplicacion se podra visualizar en la siguiente direccion localhost (127.0.0.1) en el puerto 8100
 asegurate de que el puerto este libre.
