@@ -26,13 +26,13 @@
             <ion-input type="text" formControlName="email"></ion-input>
           </ion-item>
           <ion-item>
-              <ion-label fixed>Password: </ion-label>
-              <ion-input type="password" formControlName="password"></ion-input>
-            </ion-item>
+            <ion-label fixed>Password: </ion-label>
+            <ion-input type="password" formControlName="password"></ion-input>
+          </ion-item>
         </ion-list>
       </form>
       <div padding>
-        <button ion-button block (click) = "doLoggin($event)">Loggin</button>
+        <button ion-button block (click) = "doLoggin($event)" [disabled] = "logginForm.invalid">Loggin</button>
       </div>
     </ion-card-content>
   </ion-card>

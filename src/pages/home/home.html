@@ -19,7 +19,7 @@
             <ion-input type="text" formControlName="emailContacto"></ion-input>
           </ion-item>
           <div padding>
-            <button [disabled] = "isSearching" ion-button block (click) = "onFormSubmit($event)">{{ isSearching ? 'Buscando' : 'Buscar' }}</button>
+            <button [disabled] = "isSearching || filterForm.invalid" ion-button block (click) = "onFormSubmit($event)">{{ isSearching ? 'Buscando' : 'Buscar' }}</button>
           </div>
           <ion-grid *ngIf="!isSearching">
             <ion-row>
@@ -37,6 +37,13 @@
               </ion-col>
             </ion-row>
             <ion-row>
+              <div *ngIf="errorObj.status">
+                  <small class="error-message-inputs">
+                      {{ errorObj.message }}
+                  </small>
+              </div>
+            </ion-row>
+            <ion-row>
               <ion-col>
                 <ion-item>
                   <ion-label fixed>BookingId: </ion-label>
@@ -45,7 +52,7 @@
               </ion-col>
             </ion-row>
             <div padding>
-              <button ion-button block (click) = "onFiltered($event)">Filtrar</button>
+              <button ion-button block (click)="onFiltered($event)">Filtrar</button>
             </div>
           </ion-grid>
         </ion-list>
