@@ -1,14 +1,81 @@
 <ion-header>
   <ion-navbar>
     <ion-title>
-      Ionic Blank
+      Informacion Booking
     </ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
-  The world is your oyster.
-  <p>
-    If you get lost, the <a href="http://ionicframework.com/docs/v2">docs</a> will be your guide.
-  </p>
+  <ion-card center>
+    <ion-card-header>
+      Datos del usuario
+    </ion-card-header>
+    <ion-card-content>
+      <form [formGroup]="filterForm">
+        <ion-list>
+          <ion-item>
+            <ion-label fixed>Email: </ion-label>
+            <ion-input type="text" formControlName="emailContacto"></ion-input>
+          </ion-item>
+          <div padding>
+            <button [disabled] = "isSearching" ion-button block (click) = "onFormSubmit($event)">{{ isSearching ? 'Buscando' : 'Buscar' }}</button>
+          </div>
+          <ion-grid *ngIf="!isSearching">
+            <ion-row>
+              <ion-col>
+                <ion-item>
+                  <ion-label fixed>Precio minimo: </ion-label>
+                  <ion-input type="number" min="0" formControlName="minPrice"></ion-input>
+                </ion-item>
+              </ion-col>
+              <ion-col>
+                <ion-item>
+                  <ion-label fixed>Precio Maximo: </ion-label>
+                  <ion-input type="number" min="0" formControlName="maxPrice"></ion-input>
+                </ion-item>
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col>
+                <ion-item>
+                  <ion-label fixed>BookingId: </ion-label>
+                  <ion-input type="number" min="0" formControlName="bookingId"></ion-input>
+                </ion-item>
+              </ion-col>
+            </ion-row>
+            <div padding>
+              <button ion-button block (click) = "onFiltered($event)">Filtrar</button>
+            </div>
+          </ion-grid>
+        </ion-list>
+      </form>
+    </ion-card-content>
+  </ion-card>
+  
+  <ion-list *ngIf="bookingDataFiletered?.length > 0; else noItemsToShow" >
+    <ion-item *ngFor = "let booking of bookingDataFiletered">
+      <ion-card>
+        <ion-card-header>
+          BookingId: {{ booking.bookingId }}
+        </ion-card-header>
+        <ion-card-content>
+          <p>Cliente: {{ booking.clientName }}</p>
+          <p>Creacion: {{ booking.bookingTime }}</p>
+          <p>Direccion: {{ booking.streetAddres }}</p>
+          <p>Precio: {{ booking.bookingPrice }}</p>
+        </ion-card-content>
+      </ion-card>
+    </ion-item>
+  </ion-list>
+  <ng-template #noItemsToShow>
+      <ion-card>
+          <ion-card-header>
+            No hay items para mostrar
+          </ion-card-header>
+          <ion-card-content>
+            <p>Intente nuevamente</p>
+          </ion-card-content>
+        </ion-card>
+  </ng-template>
 </ion-content>

@@ -25,6 +25,7 @@ export class LoginPage {
     public changeDetectorRef: ChangeDetectorRef,
     public navController: NavController
     ) {
+      this.checkUserLogged();
       this.logginForm = this.initializeForm();
       this.logginSubscriptions = new Subscription();
       this.onLoginSubscription();
@@ -36,6 +37,11 @@ export class LoginPage {
 
   ionViewWillUnload() {
     this.logginSubscriptions.unsubscribe();
+  }
+
+  checkUserLogged(): void {
+    if(this.authService.getCurrentUserValue())
+      this.navController.push(HomePage);
   }
 
   onLoginSubscription(): void {
